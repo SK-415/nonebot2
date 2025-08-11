@@ -25,14 +25,14 @@ jobs:
           app_id: ${{ secrets.APP_ID }}
           private_key: ${{ secrets.APP_KEY }}
 
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with:
           token: ${{ steps.generate-token.outputs.token }}
 
       - name: Setup Node Environment
         uses: ./.github/actions/setup-node
 
-      - uses: release-drafter/release-drafter@v6.0.0
+      - uses: release-drafter/release-drafter@v6.1.0
         id: release-drafter
         env:
           GITHUB_TOKEN: ${{ steps.generate-token.outputs.token }}
@@ -70,7 +70,7 @@ jobs:
           app_id: ${{ secrets.APP_ID }}
           private_key: ${{ secrets.APP_KEY }}
 
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       - name: Setup Python Environment
         uses: ./.github/actions/setup-python
@@ -92,7 +92,7 @@ jobs:
         if: steps.version.outputs.VERSION != steps.version.outputs.TAG_VERSION
         run: exit 1
 
-      - uses: release-drafter/release-drafter@v6.0.0
+      - uses: release-drafter/release-drafter@v6.1.0
         with:
           name: Release ${{ steps.version.outputs.TAG_NAME }} 🌈
           tag: ${{ steps.version.outputs.TAG_NAME }}
